@@ -38,9 +38,12 @@ namespace mission06_mh2323.Controllers
             _movieContext.Add(mv);
             _movieContext.SaveChanges();
 
-            return View(mv);
+            return View("confirmation", mv);
         }
-
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
         public IActionResult MyPodcasts()
         {
             return View();
