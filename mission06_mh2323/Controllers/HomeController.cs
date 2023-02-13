@@ -38,9 +38,9 @@ namespace mission06_mh2323.Controllers
             { 
                 //Add and Save input to db
                 _movieContext.Add(mv);
-            _movieContext.SaveChanges();
+                _movieContext.SaveChanges();
 
-            return View("confirmation", mv);
+                return View("confirmation", mv);
             }
             else
             {
