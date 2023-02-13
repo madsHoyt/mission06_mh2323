@@ -18,44 +18,56 @@
                 <!--Category-->
                 <div class="col">
                     <label asp-for="Category" style="font-weight:bold">Category</label>
-                    <input asp-for="Category" class="form-control" required />
+                    <input asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                    <br />
                 </div>
                 <!--Title-->
                 <div class="col">
                     <label asp-for="Title" style="font-weight:bold">Title</label><br />
-                    <input asp-for="Title" class="form-control" required />
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                    <br />
                 </div>
             </div>
             <div class="row">
                 <!--Year-->
                 <div class="col">
                     <label asp-for="Year" style="font-weight:bold">Year</label><br />
-                    <input asp-for="Year" class="form-control" required />
+                    <input asp-for="Year" class="form-control" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                    <br />
                 </div>
                 <!--Director-->
                 <div class="col">
                     <label asp-for="Director" style="font-weight:bold">Director</label><br />
-                    <input asp-for="Director" class="form-control" required />
+                    <input asp-for="Director" class="form-control" />
+                    <span asp-validation-for="Director" class="text-danger"></span>
+                    <br />
                 </div>
             </div>
             <div class="row">
                 <!--Rating-->
                 <div class="col">
                     <label asp-for="Rating" style="font-weight:bold">Rating</label><br />
-                    <select asp-for="Rating" class="form-control" required>
+                    <select asp-for="Rating" class="form-control">
                         <option value="G">G</option>
                         <option value="PG">PG</option>
                         <option value="PG-13">PG-13</option>
                         <option value="R">R</option>
                     </select>
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                    <br />
                 </div>
                 <!--Edited-->
                 <div class="col">
                     <label asp-for="Edited" style="font-weight:bold">Edited</label><br />
                     <select asp-for="Edited" class="form-control">
-                        <option value="true">Yes</option>
                         <option value="false">No</option>
+                        <option value="true">Yes</option>
                     </select>
+                    <span asp-validation-for="Edited" class="text-danger"></span>
+                    <br />
                 </div>
             </div>
             <div class="row">
@@ -63,11 +75,15 @@
                 <div class="col">
                     <label asp-for="LentTo" style="font-weight:bold">Lent To</label><br />
                     <input asp-for="LentTo" class="form-control" />
+                    <span asp-validation-for="LentTo" class="text-danger"></span>
+                    <br />
                 </div>
                 <!--Notes-->
                 <div class="col">
                     <label asp-for="Notes" style="font-weight:bold">Notes</label><br />
-                    <input asp-for="Notes" class="form-control" maxlength="25" />
+                    <input asp-for="Notes" class="form-control" />
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                    <br />
                 </div>
             </div>
             <!--Submit-->

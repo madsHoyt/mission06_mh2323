@@ -34,13 +34,23 @@ namespace mission06_mh2323.Controllers
         [HttpPost]
         public IActionResult Movies(Movie mv)
         {
-            //Add and Save input to db
-            _movieContext.Add(mv);
+            if (ModelState.IsValid)
+            { 
+                //Add and Save input to db
+                _movieContext.Add(mv);
             _movieContext.SaveChanges();
 
-            return View(mv);
+            return View("confirmation", mv);
+            }
+            else
+            {
+                return View();
+            }
         }
-
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
         public IActionResult MyPodcasts()
         {
             return View();
