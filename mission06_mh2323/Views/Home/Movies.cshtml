@@ -17,9 +17,15 @@
             <div class="row">
                 <!--Category-->
                 <div class="col">
-                    <label asp-for="Category" style="font-weight:bold">Category</label>
-                    <input asp-for="Category" class="form-control" />
-                    <span asp-validation-for="Category" class="text-danger"></span>
+                    <label asp-for="CategoryId" style="font-weight:bold">Category</label>
+                    <select asp-for="CategoryId" class="form-control">
+                        <option value="">Select a Category</option>
+                        @foreach (Category c in ViewBag.Categories)
+                        {
+                            <option value="@c.CategoryId">@c.CategoryName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
                     <br />
                 </div>
                 <!--Title-->

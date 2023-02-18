@@ -13,8 +13,6 @@ namespace mission06_mh2323.Models
         [Required]
         public int MovieId { get; set; }
         [Required]
-        public string Category { get; set; }
-        [Required]
         public string Title { get; set; }
         [Required]
         public int Year { get; set; }
@@ -27,6 +25,10 @@ namespace mission06_mh2323.Models
 
         [Range(0, 25, ErrorMessage = "Max length 25 characters")]
         public string Notes { get; set; }
+
+        //Build foreign key relationship
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
     }
 }

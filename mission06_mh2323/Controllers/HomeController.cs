@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using mission06_mh2323.Models;
 using System;
@@ -28,6 +29,8 @@ namespace mission06_mh2323.Controllers
         [HttpGet]
         public IActionResult Movies()
         {
+            ViewBag.Categories = _movieContext.Categories.ToList();
+
             return View();
         }
         //Post for Movies page
@@ -44,6 +47,7 @@ namespace mission06_mh2323.Controllers
             }
             else
             {
+                ViewBag.Categories = _movieContext.Categories.ToList();
                 return View();
             }
         }
@@ -61,6 +65,56 @@ namespace mission06_mh2323.Controllers
             return View();
         }
 
+        //Movie List
+        [HttpGet]
+        public IActionResult MovieList()
+        {
+            var movies = _movieContext.responses
+                .Include(x => x.Category)
+                .OrderBy(x=> x.Title).ToList();
+            return View(movies);
+        }
+        //Edit View
+        [HttpGet]
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Categories = _movieContext.Categories.ToList();
+            var movieEntry = _movieContext.responses.Single(x => x.MovieId == movieid);
+            return View("Movies", movieEntry);
+        }
+        [HttpPost]
+        public IActionResult Edit(Movie mc)
+        {
+            if (ModelState.IsValid)
+            {
+                //Add and Save input to db
+                _movieContext.Update(mc);
+                _movieContext.SaveChanges();
+
+                return RedirectToAction("MovieList");
+            }
+            else
+            {
+                ViewBag.Categories = _movieContext.Categories.ToList();
+                return View("Movies");
+            }
+        }
+        //Delete View
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+           var movieEntry = _movieContext.responses.Single(x => x.MovieId == movieid);
+
+            return View(movieEntry);
+        }
+        [HttpPost]
+        public IActionResult Delete (Movie md)
+        {
+            _movieContext.responses.Remove(md);
+            _movieContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

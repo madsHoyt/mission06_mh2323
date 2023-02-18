@@ -8,7 +8,7 @@ using mission06_mh2323.Models;
 namespace mission06_mh2323.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230211061308_Initial")]
+    [Migration("20230218001358_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,16 +17,63 @@ namespace mission06_mh2323.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("mission06_mh2323.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Drama"
+                        });
+                });
+
             modelBuilder.Entity("mission06_mh2323.Models.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Edited")
@@ -39,9 +86,11 @@ namespace mission06_mh2323.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Year")
@@ -49,13 +98,15 @@ namespace mission06_mh2323.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action/Comedy",
+                            CategoryId = 1,
                             Director = "The Wachowskis",
                             Edited = false,
                             LentTo = "Becky",
@@ -67,7 +118,7 @@ namespace mission06_mh2323.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Family/Musical",
+                            CategoryId = 2,
                             Director = "Nathan Greno/Byron Howard",
                             Edited = false,
                             Rating = "PG",
@@ -77,13 +128,22 @@ namespace mission06_mh2323.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Comedy/Fantasy",
+                            CategoryId = 3,
                             Director = "Vicky Jenson/Andrew Adamson",
                             Edited = false,
                             Rating = "PG",
                             Title = "Shrek",
                             Year = 2001
                         });
+                });
+
+            modelBuilder.Entity("mission06_mh2323.Models.Movie", b =>
+                {
+                    b.HasOne("mission06_mh2323.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

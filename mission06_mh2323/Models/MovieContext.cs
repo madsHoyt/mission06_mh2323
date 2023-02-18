@@ -16,15 +16,25 @@ namespace mission06_mh2323.Models
 
         //setting connection 
         public DbSet<Movie> responses { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder ab)
         {
+            //Seeding database
+            ab.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Action" },
+                new Category { CategoryId = 2, CategoryName = "Family" },
+                new Category { CategoryId = 3, CategoryName = "Comedy" },
+                new Category { CategoryId = 4, CategoryName = "Romance" },
+                new Category { CategoryId = 5, CategoryName = "Horror" },
+                new Category { CategoryId = 6, CategoryName = "Drama" }
+                ); 
             //Seeding database
             ab.Entity<Movie>().HasData(
                 new Movie
                 {
+
                     MovieId = 1,
-                    Category = "Action/Comedy",
+                    CategoryId = 1,
                     Title = "Speed Racer",
                     Year = 2008,
                     Director = "The Wachowskis",
@@ -36,7 +46,7 @@ namespace mission06_mh2323.Models
                 new Movie
                 {
                     MovieId = 2,
-                    Category = "Family/Musical",
+                    CategoryId = 2,
                     Title = "Tangled",
                     Year = 2010,
                     Director = "Nathan Greno/Byron Howard",
@@ -49,7 +59,7 @@ namespace mission06_mh2323.Models
                 new Movie
                 {
                     MovieId = 3,
-                    Category = "Comedy/Fantasy",
+                    CategoryId = 3,
                     Title = "Shrek",
                     Year = 2001,
                     Director = "Vicky Jenson/Andrew Adamson",
