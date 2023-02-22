@@ -27,6 +27,7 @@ namespace mission06_mh2323.Models
         public string Notes { get; set; }
 
         //Build foreign key relationship
+        [Required]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
